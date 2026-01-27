@@ -20,6 +20,7 @@ const navLinks = [
     ]
   },
   { name: 'Contact', path: '/contact' },
+  { name: 'Quote', path: '/quote' },
 ];
 
 export const Navbar = () => {
@@ -133,9 +134,9 @@ export const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link to="/contact">
+            <Link to="/quote">
               <Button className="glow-button text-primary-foreground">
-                Get a Quote
+                Request Quote
               </Button>
             </Link>
           </div>
@@ -212,9 +213,9 @@ export const Navbar = () => {
                   </motion.div>
                 ))}
                 <div className="px-4 pt-4">
-                  <Link to="/contact" className="block">
+                  <Link to="/quote" className="block">
                     <Button className="w-full glow-button text-primary-foreground">
-                      Get a Quote
+                      Request Quote
                     </Button>
                   </Link>
                 </div>

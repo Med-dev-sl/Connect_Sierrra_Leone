@@ -170,9 +170,9 @@ const Services = () => {
                     ))}
                   </div>
 
-                  <Link to="/contact">
+                  <Link to="/quote">
                     <Button className="glow-button text-primary-foreground">
-                      Get Started
+                      Get a Quote
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </Link>
