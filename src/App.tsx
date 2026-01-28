@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
@@ -14,13 +14,14 @@ import Blog from "./pages/Blog";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Quote from "./pages/Quote";
-import AdminLogin from "./pages/AdminLogin";
+import { LoginPage } from "./pages/LoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminQuotes from "./pages/AdminQuotes";
 import AdminUsers from "./pages/AdminUsers";
 import AdminPages from "./pages/AdminPages";
 import AdminSettings from "./pages/AdminSettings";
 import NotFound from "./pages/NotFound";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -43,13 +44,53 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/quote" element={<Quote />} />
           
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/quotes" element={<AdminQuotes />} />
-          <Route path="/admin/pages" element={<AdminPages />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/settings" element={<AdminSettings />} />
+          {/* Auth Routes */}
+          <Route path="/login" element={<LoginPage />} />
+          
+          {/* Admin Routes - Protected */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/admin/pages" 
+            element={
+              <ProtectedRoute requiredRole="moderator">
+                <AdminPages />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/admin/quotes" 
+            element={
+              <ProtectedRoute requiredRole="moderator">
+                <AdminQuotes />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/admin/users" 
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminUsers />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/admin/settings" 
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminSettings />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Redirect old admin login to new login */}
+          <Route path="/admin/login" element={<Navigate to="/login" replace />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
