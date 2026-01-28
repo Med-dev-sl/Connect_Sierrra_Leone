@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import useAdminAuth from '@/hooks/use-admin-auth';
-import { useDatabase, Page } from '@/hooks/use-database';
+import { useDatabase, type Page } from '@/hooks/use-database';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -78,7 +78,7 @@ export default function AdminPages() {
       slug: page.slug,
       content: page.content,
       meta_description: page.meta_description || '',
-      status: page.status,
+      status: page.status as 'draft' | 'published',
     });
     setIsEditOpen(true);
   };
@@ -130,6 +130,11 @@ export default function AdminPages() {
       setPages(pages.map((p) => (p.id === page.id ? updated : p)));
       toast.success(`Page ${newStatus} successfully`);
     }
+  };
+
+  const getDisplayStatus = (status: string): 'draft' | 'published' => {
+    if (status === 'published') return 'published';
+    return 'draft';
   };
 
   return (
