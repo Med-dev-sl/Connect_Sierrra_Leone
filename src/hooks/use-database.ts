@@ -1,104 +1,14 @@
 import { useState, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import type { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 
-export interface Page {
-  id: string;
-  title: string;
-  slug: string;
-  content: string;
-  meta_description?: string;
-  meta_keywords?: string;
-  featured_image?: string;
-  status: 'draft' | 'published' | 'archived';
-  author_id?: string;
-  view_count: number;
-  is_homepage: boolean;
-  template_type?: string;
-  created_at: string;
-  updated_at: string;
-  published_at?: string;
-}
-
-export interface Quote {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  company?: string;
-  service: string;
-  budget: string;
-  message: string;
-  status: 'pending' | 'reviewed' | 'quoted' | 'rejected';
-  assigned_to?: string;
-  quote_amount?: number;
-  notes?: string;
-  created_at: string;
-  updated_at: string;
-  replied_at?: string;
-}
-
-export interface Service {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  icon?: string;
-  price_range?: string;
-  featured_image?: string;
-  status: 'active' | 'inactive';
-  order_index: number;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  avatar?: string;
-  role: 'admin' | 'moderator' | 'editor' | 'viewer';
-  is_active: boolean;
-  last_login?: string;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface Testimonial {
-  id: string;
-  client_name: string;
-  client_company?: string;
-  client_avatar?: string;
-  content: string;
-  rating: number;
-  service_id?: string;
-  status: 'pending' | 'approved' | 'rejected';
-  featured: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface Settings {
-  id: string;
-  company_name?: string;
-  company_email?: string;
-  company_phone?: string;
-  company_address?: string;
-  company_logo?: string;
-  company_favicon?: string;
-  business_hours_open?: string;
-  business_hours_close?: string;
-  social_facebook?: string;
-  social_twitter?: string;
-  social_linkedin?: string;
-  social_instagram?: string;
-  quote_email_notification: boolean;
-  auto_reply_enabled: boolean;
-  auto_reply_message?: string;
-  maintenance_mode: boolean;
-  theme_primary_color?: string;
-  theme_accent_color?: string;
-  updated_at: string;
-}
+// Export types using the Supabase generated types
+export type Page = Tables<'pages'>;
+export type Quote = Tables<'quotes'>;
+export type Service = Tables<'services'>;
+export type User = Tables<'users'>;
+export type Testimonial = Tables<'testimonials'>;
+export type Settings = Tables<'settings'>;
 
 // Database Hook
 export const useDatabase = () => {
@@ -134,9 +44,9 @@ export const useDatabase = () => {
         .from('pages')
         .select('*')
         .eq('slug', slug)
-        .single();
+        .maybeSingle();
       if (err) throw err;
-      return data as Page;
+      return data as Page | null;
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to fetch page';
       setError(errorMsg);
@@ -146,13 +56,13 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const createPage = useCallback(async (page: Omit<Page, 'id' | 'created_at' | 'updated_at'>) => {
+  const createPage = useCallback(async (page: TablesInsert<'pages'>) => {
     setIsLoading(true);
     setError(null);
     try {
       const { data, error: err } = await supabase
         .from('pages')
-        .insert([page])
+        .insert(page)
         .select()
         .single();
       if (err) throw err;
@@ -166,7 +76,7 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const updatePage = useCallback(async (id: string, updates: Partial<Page>) => {
+  const updatePage = useCallback(async (id: string, updates: TablesUpdate<'pages'>) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -227,13 +137,13 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const createQuote = useCallback(async (quote: Omit<Quote, 'id' | 'created_at' | 'updated_at'>) => {
+  const createQuote = useCallback(async (quote: TablesInsert<'quotes'>) => {
     setIsLoading(true);
     setError(null);
     try {
       const { data, error: err } = await supabase
         .from('quotes')
-        .insert([quote])
+        .insert(quote)
         .select()
         .single();
       if (err) throw err;
@@ -247,7 +157,7 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const updateQuote = useCallback(async (id: string, updates: Partial<Quote>) => {
+  const updateQuote = useCallback(async (id: string, updates: TablesUpdate<'quotes'>) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -308,13 +218,13 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const createService = useCallback(async (service: Omit<Service, 'id' | 'created_at' | 'updated_at'>) => {
+  const createService = useCallback(async (service: TablesInsert<'services'>) => {
     setIsLoading(true);
     setError(null);
     try {
       const { data, error: err } = await supabase
         .from('services')
-        .insert([service])
+        .insert(service)
         .select()
         .single();
       if (err) throw err;
@@ -328,7 +238,7 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const updateService = useCallback(async (id: string, updates: Partial<Service>) => {
+  const updateService = useCallback(async (id: string, updates: TablesUpdate<'services'>) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -369,13 +279,13 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const createUser = useCallback(async (user: Omit<User, 'id' | 'created_at' | 'updated_at'>) => {
+  const createUser = useCallback(async (user: TablesInsert<'users'>) => {
     setIsLoading(true);
     setError(null);
     try {
       const { data, error: err } = await supabase
         .from('users')
-        .insert([user])
+        .insert(user)
         .select()
         .single();
       if (err) throw err;
@@ -389,7 +299,7 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const updateUser = useCallback(async (id: string, updates: Partial<User>) => {
+  const updateUser = useCallback(async (id: string, updates: TablesUpdate<'users'>) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -437,25 +347,26 @@ export const useDatabase = () => {
       const { data, error: err } = await supabase
         .from('settings')
         .select('*')
-        .single();
-      if (err && err.code !== 'PGRST116') throw err;
-      return (data || {}) as Settings;
+        .maybeSingle();
+      if (err) throw err;
+      return data as Settings | null;
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to fetch settings';
       setError(errorMsg);
-      return {} as Settings;
+      return null;
     } finally {
       setIsLoading(false);
     }
   }, []);
 
-  const updateSettings = useCallback(async (updates: Partial<Settings>) => {
+  const updateSettings = useCallback(async (id: string, updates: TablesUpdate<'settings'>) => {
     setIsLoading(true);
     setError(null);
     try {
       const { data, error: err } = await supabase
         .from('settings')
         .update(updates)
+        .eq('id', id)
         .select()
         .single();
       if (err) throw err;
@@ -490,13 +401,13 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const createTestimonial = useCallback(async (testimonial: Omit<Testimonial, 'id' | 'created_at' | 'updated_at'>) => {
+  const createTestimonial = useCallback(async (testimonial: TablesInsert<'testimonials'>) => {
     setIsLoading(true);
     setError(null);
     try {
       const { data, error: err } = await supabase
         .from('testimonials')
-        .insert([testimonial])
+        .insert(testimonial)
         .select()
         .single();
       if (err) throw err;
@@ -510,7 +421,7 @@ export const useDatabase = () => {
     }
   }, []);
 
-  const updateTestimonial = useCallback(async (id: string, updates: Partial<Testimonial>) => {
+  const updateTestimonial = useCallback(async (id: string, updates: TablesUpdate<'testimonials'>) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -563,3 +474,5 @@ export const useDatabase = () => {
     updateTestimonial,
   };
 };
+
+export default useDatabase;

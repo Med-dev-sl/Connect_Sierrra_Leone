@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import type { Session, AuthError } from '@supabase/supabase-js';
+import type { Tables } from '@/integrations/supabase/types';
+
+type UserRow = Tables<'users'>;
 
 interface AuthUser {
   id: string;
@@ -52,14 +55,20 @@ export function useAuth(): UseAuthReturn {
             .from('users')
             .select('id, email, name, role, avatar')
             .eq('id', session.user.id)
-            .single();
+            .maybeSingle();
           
-          if (profileError && profileError.code !== 'PGRST116') {
+          if (profileError) {
             throw profileError;
           }
           
           if (userProfile) {
-            setUser(userProfile as AuthUser);
+            setUser({
+              id: userProfile.id,
+              email: userProfile.email,
+              name: userProfile.name,
+              role: userProfile.role as AuthUser['role'],
+              avatar: userProfile.avatar || undefined,
+            });
           } else {
             setUser({
               id: session.user.id,
@@ -90,10 +99,16 @@ export function useAuth(): UseAuthReturn {
               .from('users')
               .select('id, email, name, role, avatar')
               .eq('id', newSession.user.id)
-              .single();
+              .maybeSingle();
             
             if (!profileError && userProfile) {
-              setUser(userProfile as AuthUser);
+              setUser({
+                id: userProfile.id,
+                email: userProfile.email,
+                name: userProfile.name,
+                role: userProfile.role as AuthUser['role'],
+                avatar: userProfile.avatar || undefined,
+              });
             }
           } catch (err) {
             console.error('Error fetching user profile:', err);
@@ -137,6 +152,7 @@ export function useAuth(): UseAuthReturn {
         password,
         options: {
           data: { name },
+          emailRedirectTo: window.location.origin,
         },
       });
       
