@@ -80,13 +80,13 @@ export function LoginPage() {
 
           <div className="mt-6 pt-6 border-t">
             <p className="text-xs text-gray-500 text-center">
-              Default credentials for testing:
+              Admin credentials:
             </p>
             <p className="text-xs text-gray-600 text-center mt-2">
               <strong>Email:</strong> admin@connectsl.com
             </p>
             <p className="text-xs text-gray-600 text-center">
-              <strong>Password:</strong> (set during Supabase setup)
+              <strong>Password:</strong> ConnectSL2024!
             </p>
           </div>
         </div>
