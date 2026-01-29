@@ -5,28 +5,28 @@ import { Users, Briefcase, Award, Globe } from 'lucide-react';
 const stats = [
   {
     icon: Briefcase,
-    value: 150,
+    value: 15,
     suffix: '+',
     label: 'Projects Completed',
     description: 'Successfully delivered',
   },
   {
     icon: Users,
-    value: 100,
+    value: 30,
     suffix: '+',
     label: 'Happy Clients',
     description: 'Trust our expertise',
   },
   {
     icon: Award,
-    value: 5,
+    value: 3,
     suffix: '+',
     label: 'Years Experience',
     description: 'In the industry',
   },
   {
     icon: Globe,
-    value: 10,
+    value: 3,
     suffix: '+',
     label: 'Countries Served',
     description: 'Worldwide reach',
