@@ -32,7 +32,20 @@ Deno.serve(async (req) => {
     const adminExists = existingUsers?.users?.find(u => u.email === adminEmail)
 
     if (adminExists) {
-      // Check if user profile and role exist
+      // Reset admin password to ensure it works
+      const { error: updateError } = await supabase.auth.admin.updateUserById(
+        adminExists.id,
+        { 
+          password: adminPassword,
+          email_confirm: true,
+        }
+      )
+      
+      if (updateError) {
+        console.error('Password update error:', updateError)
+      }
+
+      // Check if user profile exists
       const { data: profile } = await supabase
         .from('users')
         .select('id')
@@ -48,6 +61,11 @@ Deno.serve(async (req) => {
           role: 'admin',
           is_active: true,
         })
+      } else {
+        // Update existing profile
+        await supabase.from('users')
+          .update({ role: 'admin', is_active: true })
+          .eq('id', adminExists.id)
       }
 
       // Check if admin role exists
@@ -67,7 +85,7 @@ Deno.serve(async (req) => {
       return new Response(
         JSON.stringify({ 
           success: true, 
-          message: 'Admin account already exists and is configured',
+          message: 'Admin account configured and password reset',
           credentials: {
             email: adminEmail,
             password: adminPassword,
