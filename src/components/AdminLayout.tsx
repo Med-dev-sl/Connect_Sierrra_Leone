@@ -9,11 +9,16 @@ import {
   X,
   Bell,
   User,
-  ChevronDown
+  ChevronDown,
+  FileText,
+  Briefcase,
+  Star,
+  Users,
+  Home
 } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import useAdminAuth from '@/hooks/use-admin-auth';
+import { useAuth } from '@/hooks/use-auth';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -21,7 +26,11 @@ interface AdminLayoutProps {
 
 const adminNavLinks = [
   { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
+  { name: 'Pages', path: '/admin/pages', icon: FileText },
+  { name: 'Services', path: '/admin/services', icon: Briefcase },
   { name: 'Quotes', path: '/admin/quotes', icon: MessageSquare },
+  { name: 'Testimonials', path: '/admin/testimonials', icon: Star },
+  { name: 'Users', path: '/admin/users', icon: Users },
   { name: 'Settings', path: '/admin/settings', icon: Settings },
 ];
 
@@ -31,7 +40,7 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, logout } = useAdminAuth();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,9 +50,9 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/admin/login');
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
   };
 
   return (

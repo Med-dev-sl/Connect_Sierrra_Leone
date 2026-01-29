@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import AdminLayout from '@/components/AdminLayout';
-import useAdminAuth from '@/hooks/use-admin-auth';
+import { useAuth } from '@/hooks/use-auth';
 import { useDatabase, type Page } from '@/hooks/use-database';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,7 +13,7 @@ import { Trash2, Edit2, Plus, CheckCircle, Clock, Loader } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function AdminPages() {
-  const { user, hasPermission } = useAdminAuth();
+  const { user, hasPermission } = useAuth();
   const { getPages, createPage, updatePage, deletePage, isLoading, error } = useDatabase();
   
   const [pages, setPages] = useState<Page[]>([]);

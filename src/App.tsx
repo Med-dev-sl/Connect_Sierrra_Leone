@@ -19,6 +19,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminQuotes from "./pages/AdminQuotes";
 import AdminUsers from "./pages/AdminUsers";
 import AdminPages from "./pages/AdminPages";
+import AdminServices from "./pages/AdminServices";
+import AdminTestimonials from "./pages/AdminTestimonials";
 import AdminSettings from "./pages/AdminSettings";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -69,6 +71,22 @@ const App = () => (
             element={
               <ProtectedRoute requiredRole="moderator">
                 <AdminQuotes />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/admin/services" 
+            element={
+              <ProtectedRoute requiredRole="editor">
+                <AdminServices />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/admin/testimonials" 
+            element={
+              <ProtectedRoute requiredRole="moderator">
+                <AdminTestimonials />
               </ProtectedRoute>
             } 
           />
