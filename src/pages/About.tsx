@@ -14,12 +14,12 @@ const values = [
 ];
 
 const milestones = [
-  { year: '2019', title: 'Company Founded', description: 'Started with a vision to transform Sierra Leone\'s tech landscape.' },
-  { year: '2020', title: 'First Major Client', description: 'Delivered our first enterprise-level project.' },
-  { year: '2021', title: 'Team Expansion', description: 'Grew to a team of 10 talented professionals.' },
-  { year: '2022', title: 'International Reach', description: 'Started serving clients across Africa and beyond.' },
-  { year: '2023', title: '100+ Projects', description: 'Milestone of 100 successful project deliveries.' },
-  { year: '2024', title: 'Award Recognition', description: 'Recognized as a leading tech company in West Africa.' },
+  { year: '2023', title: 'Company Founded', description: 'Started with a vision to transform Sierra Leone\'s tech landscape.' },
+  { year: '2024', title: 'First Major Client', description: 'Delivered our first enterprise-level project.' },
+  { year: '2024', title: 'Team Expansion', description: 'Grew to a team of 10 talented professionals.' },
+  { year: '2025', title: 'International Reach', description: 'Started serving clients across Africa and beyond.' },
+  { year: '2025/2026', title: '15+  Projects', description: 'Milestone of 100 successful project deliveries.' },
+  { year: '2024', title: 'Award Recognition', description: 'Recognized as a best in Team in a Tech Hackathon.' },
 ];
 
 const About = () => {
