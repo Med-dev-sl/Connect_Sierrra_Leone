@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Calendar, User, ArrowRight, Clock } from 'lucide-react';
+import { Search, Calendar, User, ArrowRight, Clock, Loader } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ParticleBackground } from '@/components/ParticleBackground';
 import { Navbar } from '@/components/Navbar';
@@ -8,14 +8,15 @@ import { Footer } from '@/components/Footer';
 import { Card3D } from '@/components/Card3D';
 import { Input } from '@/components/ui/input';
 
-const categories = ['All', 'Tech Tips', 'Industry News', 'Tutorials', 'Case Studies'];
+const categories = ['All', 'Technology', 'Business', 'Science', 'Health'];
 
-const posts = [
+// Default fallback posts in case API fails
+const defaultPosts = [
   {
     id: 1,
     title: 'The Future of Mobile App Development in Africa',
     excerpt: 'Exploring the trends and opportunities shaping mobile app development across the African continent.',
-    category: 'Industry News',
+    category: 'Technology',
     author: 'Ibrahim Kamara',
     date: 'Jan 15, 2024',
     readTime: '5 min read',
@@ -23,9 +24,9 @@ const posts = [
   },
   {
     id: 2,
-    title: '10 Essential Tips for Building a Successful E-commerce Website',
-    excerpt: 'Learn the key strategies for creating an online store that converts visitors into customers.',
-    category: 'Tutorials',
+    title: '10 Essential Tips for Building a Successful Website',
+    excerpt: 'Learn the key strategies for creating a website that converts visitors into customers.',
+    category: 'Business',
     author: 'Mariama Sesay',
     date: 'Jan 10, 2024',
     readTime: '8 min read',
@@ -33,42 +34,12 @@ const posts = [
   },
   {
     id: 3,
-    title: 'How We Built a Telemedicine App for Sierra Leone',
-    excerpt: 'A behind-the-scenes look at developing HealthCare SL and the challenges we overcame.',
-    category: 'Case Studies',
+    title: 'The Rise of AI in Technology',
+    excerpt: 'How artificial intelligence is transforming industries and creating new opportunities.',
+    category: 'Technology',
     author: 'Abdul Conteh',
     date: 'Jan 5, 2024',
     readTime: '10 min read',
-    featured: false,
-  },
-  {
-    id: 4,
-    title: 'Why Your Business Needs a Mobile-First Website',
-    excerpt: 'Understanding the importance of mobile optimization in today\'s digital landscape.',
-    category: 'Tech Tips',
-    author: 'Fatmata Bangura',
-    date: 'Dec 28, 2023',
-    readTime: '4 min read',
-    featured: false,
-  },
-  {
-    id: 5,
-    title: 'Securing Your Business: Cybersecurity Best Practices',
-    excerpt: 'Essential security measures every business should implement to protect their digital assets.',
-    category: 'Tech Tips',
-    author: 'Mohamed Turay',
-    date: 'Dec 20, 2023',
-    readTime: '6 min read',
-    featured: false,
-  },
-  {
-    id: 6,
-    title: 'The Rise of Fintech in West Africa',
-    excerpt: 'How financial technology is transforming banking and payments across the region.',
-    category: 'Industry News',
-    author: 'Aminata Koroma',
-    date: 'Dec 15, 2023',
-    readTime: '7 min read',
     featured: false,
   },
 ];
@@ -76,6 +47,57 @@ const posts = [
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [posts, setPosts] = useState(defaultPosts);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch tech news from API
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        setLoading(true);
+        // Using NewsAPI free tier - fetches technology and business news
+        // Alternative: You can replace this with your own news API endpoint
+        const response = await fetch(
+          'https://newsapi.org/v2/everything?q=technology&sortBy=publishedAt&language=en&pageSize=12&apiKey=demo'
+        );
+        
+        if (response.ok) {
+          const data = await response.json();
+          
+          // Transform API response to match our post structure
+          const fetchedPosts = data.articles.map((article, index) => ({
+            id: index + 1,
+            title: article.title,
+            excerpt: article.description || article.content || 'Read more about this article.',
+            category: article.source.name.includes('Tech') ? 'Technology' : 'Business',
+            author: article.author || article.source.name,
+            date: new Date(article.publishedAt).toLocaleDateString('en-US', { 
+              year: 'numeric', 
+              month: 'short', 
+              day: 'numeric' 
+            }),
+            readTime: `${Math.ceil((article.content?.length || 500) / 200)} min read`,
+            featured: index === 0,
+            url: article.url,
+            image: article.urlToImage,
+          }));
+          
+          setPosts(fetchedPosts.length > 0 ? fetchedPosts : defaultPosts);
+        } else {
+          // If API fails, use default posts
+          setPosts(defaultPosts);
+        }
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        // Use default posts if fetch fails
+        setPosts(defaultPosts);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
 
   const filtered = posts.filter(post => {
     const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
@@ -196,31 +218,62 @@ const Blog = () => {
 
           {/* Posts Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(activeCategory === 'All' && !searchQuery ? regularPosts : filtered).map((post, index) => (
+            {loading ? (
               <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-full flex items-center justify-center py-12"
               >
-                <Card3D className="h-full">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/10 rounded-xl mb-4 flex items-center justify-center">
-                    <span className="text-4xl">📝</span>
-                  </div>
-                  <span className="text-xs font-subheading text-primary mb-2 block">{post.category}</span>
-                  <h3 className="text-xl font-display font-bold text-foreground mb-2">{post.title}</h3>
-                  <p className="text-muted-foreground font-body text-sm mb-4">{post.excerpt}</p>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span>{post.author}</span>
-                    <span>•</span>
-                    <span>{post.date}</span>
-                    <span>•</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                </Card3D>
+                <div className="text-center">
+                  <Loader className="w-8 h-8 animate-spin text-primary mx-auto mb-4" />
+                  <p className="text-muted-foreground font-body">Loading latest tech news...</p>
+                </div>
               </motion.div>
-            ))}
+            ) : (activeCategory === 'All' && !searchQuery ? regularPosts : filtered).length === 0 ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-full text-center py-12"
+              >
+                <p className="text-muted-foreground font-body text-lg">No articles found matching your search.</p>
+              </motion.div>
+            ) : (
+              (activeCategory === 'All' && !searchQuery ? regularPosts : filtered).map((post, index) => (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  layout
+                >
+                  <Card3D className="h-full">
+                    <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/10 rounded-xl mb-4 flex items-center justify-center overflow-hidden">
+                      {post.image ? (
+                        <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <span className="text-4xl">📝</span>
+                      )}
+                    </div>
+                    <span className="text-xs font-subheading text-primary mb-2 block">{post.category}</span>
+                    <h3 className="text-xl font-display font-bold text-foreground mb-2 line-clamp-2">{post.title}</h3>
+                    <p className="text-muted-foreground font-body text-sm mb-4 line-clamp-3">{post.excerpt}</p>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <span className="line-clamp-1">{post.author}</span>
+                      <span>•</span>
+                      <span>{post.date}</span>
+                      <span>•</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    {post.url && (
+                      <a href={post.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center text-primary font-subheading font-medium group">
+                        Read Full Article
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    )}
+                  </Card3D>
+                </motion.div>
+              ))
+            )}
           </div>
         </div>
       </main>

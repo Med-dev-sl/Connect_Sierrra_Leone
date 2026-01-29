@@ -7,56 +7,75 @@ import { Footer } from '@/components/Footer';
 import { Card3D } from '@/components/Card3D';
 import { Button } from '@/components/ui/button';
 
-const categories = ['All', 'Web Development', 'Mobile Apps', 'Graphic Design', 'E-commerce'];
+const categories = ['All', 'Web Development', 'Mobile Apps'];
 
 const projects = [
+  // Web Development
   {
     id: 1,
-    title: 'Freetown Market App',
-    category: 'Mobile Apps',
-    description: 'A marketplace app connecting local vendors with customers across Sierra Leone.',
-    image: null,
-    tags: ['React Native', 'Node.js', 'MongoDB'],
+    title: 'Nyapui Secondary School Website',
+    category: 'Web Development',
+    description: 'An informative website about Nyapui Secondary School - the first STEM school in Combema Village, Kenema. Showcases educational programs, faculty, and student achievements.',
+    liveLink: 'https://nyapuischool.com',
+    tags: ['HTML', 'CSS', 'PHP', 'JavaScript', 'MySQL'],
+    color: 'from-purple-500 to-pink-500',
   },
   {
     id: 2,
-    title: 'SL Tourism Website',
+    title: 'Magbity Agency Limited',
     category: 'Web Development',
-    description: 'A comprehensive tourism portal showcasing Sierra Leone\'s attractions.',
-    image: null,
-    tags: ['React', 'Next.js', 'Tailwind CSS'],
+    description: 'A licensed FIFA football agency platform for player transfers and consultancy services. Professional platform for managing athlete careers and transfers across Africa.',
+    liveLink: 'https://magbityagencyltd.com',
+    tags: ['React', 'Django', 'SQLite'],
+    color: 'from-blue-500 to-cyan-500',
   },
   {
     id: 3,
-    title: 'Bank of Sierra Leone Rebrand',
-    category: 'Graphic Design',
-    description: 'Complete brand identity redesign for a major financial institution.',
-    image: null,
-    tags: ['Branding', 'Logo Design', 'Print'],
+    title: 'Termo Physics - AI Learning Platform',
+    category: 'Web Development',
+    description: 'An innovative AI platform that helps pupils, students, teachers and lecturers learn physics concepts and terms. Features an AI agent specifically trained to handle physics queries and explain complex concepts.',
+    liveLink: 'https://termophysics.com',
+    tags: ['React', 'TypeScript', 'Gemini AI', 'Supabase'],
+    color: 'from-green-500 to-teal-500',
   },
   {
     id: 4,
-    title: 'AgriConnect Platform',
-    category: 'E-commerce',
-    description: 'An e-commerce platform for agricultural products and supplies.',
-    image: null,
-    tags: ['Shopify', 'Custom Theme', 'Payment Integration'],
+    title: 'UniAI-Playground',
+    category: 'Web Development',
+    description: 'An AI platform where students have personal AI tutors for their courses of study. Customized learning experience specific to each course. Coming soon.',
+    liveLink: '#',
+    tags: ['React', 'TypeScript', 'Supabase', 'Gemini AI'],
+    color: 'from-indigo-500 to-blue-500',
+    comingSoon: true,
   },
+  // Mobile Apps
   {
     id: 5,
-    title: 'HealthCare SL App',
+    title: 'Wiyone CAB',
     category: 'Mobile Apps',
-    description: 'Telemedicine app connecting patients with healthcare providers.',
-    image: null,
-    tags: ['Flutter', 'Firebase', 'Video Call'],
+    description: 'A ride booking platform that allows users to book rides within Kenema and enables riders to accept rides. Reduces unnecessary rides and waiting times for passengers while increasing efficiency.',
+    liveLink: '#',
+    tags: ['React Native', 'Firebase', 'GPS'],
+    color: 'from-yellow-500 to-orange-500',
   },
   {
     id: 6,
-    title: 'Tech Conference Branding',
-    category: 'Graphic Design',
-    description: 'Event branding and marketing materials for annual tech summit.',
-    image: null,
-    tags: ['Event Design', 'Marketing', 'Social Media'],
+    title: 'Nyapui Radio Mobile',
+    category: 'Mobile Apps',
+    description: 'A mobile application that allows users to watch Nyapui Radio live programs, news and more on a centralized platform. Stay connected with community voice initiatives.',
+    liveLink: '#',
+    tags: ['React', 'Firebase', 'Streaming'],
+    color: 'from-red-500 to-pink-500',
+  },
+  {
+    id: 7,
+    title: 'Ticketa - Bus Ticket Booking',
+    category: 'Mobile Apps',
+    description: 'A platform that enables users to buy bus tickets online in Sierra Leone. Simple, secure and convenient bus ticket booking system. Coming soon.',
+    liveLink: '#',
+    tags: ['React', 'TypeScript', 'Supabase'],
+    color: 'from-orange-500 to-yellow-500',
+    comingSoon: true,
   },
 ];
 
@@ -72,8 +91,22 @@ const Portfolio = () => {
       <ParticleBackground />
       <Navbar />
       
-      <main className="pt-32 pb-20">
-        <div className="container mx-auto px-4 lg:px-8">
+      <main className="pt-32 pb-20 relative">
+        {/* Background Effects */}
+        <div className="absolute inset-0 overflow-hidden -z-10">
+          <motion.div
+            className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/20 to-accent/10 blur-3xl"
+            animate={{ y: [0, 100, 0], x: [0, 50, 0] }}
+            transition={{ duration: 20, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-primary/15 to-transparent blur-3xl"
+            animate={{ y: [0, -100, 0], x: [0, -50, 0] }}
+            transition={{ duration: 25, repeat: Infinity }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -85,10 +118,10 @@ const Portfolio = () => {
               Our Work
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
-              Featured <span className="text-gradient-blue">Projects</span>
+              Featured <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Projects</span>
             </h1>
             <p className="text-xl text-muted-foreground font-body">
-              Explore our portfolio of successful projects that have helped businesses grow.
+              Explore our portfolio of successful projects that have transformed businesses and communities.
             </p>
           </motion.div>
 
@@ -123,36 +156,71 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 layout
+                className="group"
               >
-                <Card3D className="h-full">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/10 rounded-xl mb-4 flex items-center justify-center">
-                    <span className="text-4xl">🖼️</span>
+                <div className="relative h-full rounded-3xl overflow-hidden glass-card hover:shadow-2xl transition-all duration-500 p-6 flex flex-col">
+                  {/* Background Gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+
+                  {/* Image/Icon Area */}
+                  <div className={`relative aspect-video bg-gradient-to-br ${project.color} rounded-2xl mb-4 flex items-center justify-center overflow-hidden group-hover:shadow-lg transition-all duration-500`}>
+                    <motion.div
+                      className="text-5xl"
+                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      📱
+                    </motion.div>
+                    {project.comingSoon && (
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <span className="text-white font-display font-bold text-sm">Coming Soon</span>
+                      </div>
+                    )}
                   </div>
-                  <span className="text-xs font-subheading text-primary mb-2 block">
-                    {project.category}
-                  </span>
-                  <h3 className="text-xl font-display font-bold text-foreground mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground font-body text-sm mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="px-2 py-1 text-xs bg-muted/50 rounded text-muted-foreground">
-                        {tag}
-                      </span>
-                    ))}
+
+                  <div className="flex-1 flex flex-col relative z-10">
+                    <span className={`text-xs font-subheading bg-gradient-to-r ${project.color} bg-clip-text text-transparent mb-2 block`}>
+                      {project.category}
+                    </span>
+                    <h3 className="text-xl font-display font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground font-body text-sm mb-4 flex-1 leading-relaxed">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="px-2 py-1 text-xs bg-muted/50 rounded-full text-muted-foreground font-body hover:bg-muted transition-colors">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex gap-2">
+                      {!project.comingSoon ? (
+                        <>
+                          <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                            <Button variant="outline" size="sm" className="w-full group/btn">
+                              <ExternalLink className="w-4 h-4 mr-1 group-hover/btn:translate-x-1 transition-transform" /> Live
+                            </Button>
+                          </a>
+                        </>
+                      ) : (
+                        <Button variant="outline" size="sm" className="w-full" disabled>
+                          Coming Soon
+                        </Button>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <Eye className="w-4 h-4 mr-1" /> View
-                    </Button>
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <ExternalLink className="w-4 h-4 mr-1" /> Live
-                    </Button>
-                  </div>
-                </Card3D>
+
+                  {/* Border Glow Effect */}
+                  <div className={`absolute inset-0 rounded-3xl border border-transparent group-hover:border-primary/30 transition-colors duration-500 pointer-events-none`} />
+                </div>
+
+                {/* Shadow Effect */}
+                <motion.div
+                  className={`absolute -inset-2 bg-gradient-to-br ${project.color} rounded-3xl -z-10 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}
+                  whileHover={{ scale: 1.05 }}
+                />
               </motion.div>
             ))}
           </div>

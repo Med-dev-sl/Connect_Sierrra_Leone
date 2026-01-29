@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 const plans = [
   {
     name: 'Starter',
-    price: '$499',
+    price: 'SLe 5000',
     period: 'starting at',
     description: 'Perfect for small businesses and startups.',
     features: [
@@ -25,7 +25,7 @@ const plans = [
   },
   {
     name: 'Professional',
-    price: '$1,499',
+    price: 'SLe 15,000',
     period: 'starting at',
     description: 'Ideal for growing businesses with more needs.',
     features: [

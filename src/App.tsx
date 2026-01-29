@@ -24,6 +24,9 @@ import AdminTestimonials from "./pages/AdminTestimonials";
 import AdminSettings from "./pages/AdminSettings";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { NyapuiRadioClient } from "./pages/ClientNyapuiRadio";
+import { NyapuiSchoolClient } from "./pages/ClientNyapuiSchool";
+import { KakeboWaterClient } from "./pages/ClientKakeboWater";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +48,11 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/quote" element={<Quote />} />
+          
+          {/* Client Case Study Routes */}
+          <Route path="/client/nyapui-radio" element={<NyapuiRadioClient />} />
+          <Route path="/client/nyapui-school" element={<NyapuiSchoolClient />} />
+          <Route path="/client/kakebo-water" element={<KakeboWaterClient />} />
           
           {/* Auth Routes */}
           <Route path="/login" element={<LoginPage />} />

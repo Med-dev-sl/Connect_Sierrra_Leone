@@ -140,31 +140,33 @@ export const Footer = () => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="mailto:info@connectsl.com"
+                  href="mailto:info@connectsierraleone.com"
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors font-body text-base"
                 >
                   <div className="w-10 h-10 rounded-lg glass-card flex items-center justify-center">
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
-                  info@connectsl.com
+                  info@connectsierraleone.com
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+23276000000"
+                  href="https://wa.me/23272150563"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors font-body text-base"
                 >
                   <div className="w-10 h-10 rounded-lg glass-card flex items-center justify-center">
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
-                  +232 76 000 000
+                  +232 72 150 563
                 </a>
               </li>
               <li className="flex items-start gap-3 text-muted-foreground font-body text-base">
                 <div className="w-10 h-10 rounded-lg glass-card flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
-                <span>Freetown, Sierra Leone, West Africa</span>
+                <span>Kenema Plaza, Kenema, Sierra Leone, West Africa</span>
               </li>
             </ul>
           </motion.div>

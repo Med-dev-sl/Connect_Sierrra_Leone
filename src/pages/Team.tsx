@@ -7,40 +7,22 @@ import { Card3D } from '@/components/Card3D';
 
 const team = [
   {
-    name: 'Ibrahim Kamara',
-    role: 'CEO & Founder',
-    bio: 'Visionary leader with 10+ years in tech industry.',
-    skills: ['Leadership', 'Strategy', 'Business Development'],
-  },
-  {
-    name: 'Mariama Sesay',
+    name: 'Mohamed  Sallu',
     role: 'Lead Developer',
     bio: 'Full-stack developer passionate about clean code.',
-    skills: ['React', 'Node.js', 'Python'],
+    skills: ['React', 'Node.js', 'Python', 'Flutter', 'Django', 'Next.js'],
   },
   {
-    name: 'Abdul Conteh',
-    role: 'Creative Director',
-    bio: 'Award-winning designer with an eye for detail.',
-    skills: ['UI/UX', 'Branding', 'Motion Graphics'],
+    name: 'Princess Magbie',
+    role: 'UI/UX Designer',
+    bio: 'Manage and supervise all our product and apply aesthetics designs.',
+    skills: ['UI/UX', 'Branding'],
   },
   {
-    name: 'Fatmata Bangura',
-    role: 'Project Manager',
-    bio: 'Ensuring projects are delivered on time, every time.',
-    skills: ['Agile', 'Scrum', 'Communication'],
-  },
-  {
-    name: 'Mohamed Turay',
-    role: 'Mobile Developer',
-    bio: 'Crafting seamless mobile experiences.',
-    skills: ['Flutter', 'React Native', 'Swift'],
-  },
-  {
-    name: 'Aminata Koroma',
-    role: 'Marketing Lead',
-    bio: 'Building brands that resonate with audiences.',
-    skills: ['Digital Marketing', 'Content', 'SEO'],
+    name: 'Alikalie Fofanah',
+    role: 'Frontend Developer',
+    bio: 'Design and implement user-friendly web interfaces.',
+    skills: ['React', 'Vue.js', 'CSS', 'HTML'],
   },
 ];
 

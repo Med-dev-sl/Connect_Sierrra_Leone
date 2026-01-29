@@ -15,20 +15,22 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    content: 'info@connectsl.com',
+    content: 'info@connectsierraleone.com',
     description: 'We reply within 24 hours',
+    link: 'mailto:info@connectsierraleone.com',
   },
   {
     icon: Phone,
     title: 'Call Us',
-    content: '+232 76 000 000',
+    content: '+232 72 150 563',
     description: 'Mon-Fri, 9am-6pm',
+    link: 'https://wa.me/23272150563',
   },
   {
     icon: MapPin,
     title: 'Visit Us',
-    content: 'Freetown, Sierra Leone',
-    description: 'West Africa',
+    content: 'Kenema Plaza, Kenema',
+    description: 'Sierra Leone, West Africa',
   },
   {
     icon: Clock,
@@ -108,13 +110,26 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
               >
-                <Card3D className="text-center h-full">
-                  <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <info.icon className="w-6 h-6 text-primary" />
+                <Card3D className="h-full">
+                  <div className="text-center flex flex-col h-full">
+                    <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                      <info.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="font-display font-bold text-foreground mb-1">{info.title}</h3>
+                    {info.link ? (
+                      <a 
+                        href={info.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-primary font-body font-medium hover:underline transition-all"
+                      >
+                        {info.content}
+                      </a>
+                    ) : (
+                      <p className="text-foreground font-body">{info.content}</p>
+                    )}
+                    <p className="text-muted-foreground font-body text-sm mt-1">{info.description}</p>
                   </div>
-                  <h3 className="font-display font-bold text-foreground mb-1">{info.title}</h3>
-                  <p className="text-foreground font-body">{info.content}</p>
-                  <p className="text-muted-foreground font-body text-sm">{info.description}</p>
                 </Card3D>
               </motion.div>
             ))}
@@ -239,7 +254,7 @@ const Contact = () => {
                 <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/10 rounded-xl flex items-center justify-center">
                   <div className="text-center">
                     <MapPin className="w-12 h-12 text-primary mx-auto mb-2" />
-                    <p className="text-muted-foreground font-body">Freetown, Sierra Leone</p>
+                    <p className="text-muted-foreground font-body">Kenema, Sierra Leone</p>
                   </div>
                 </div>
               </Card3D>
@@ -255,7 +270,7 @@ const Contact = () => {
                   <h3 className="text-xl font-display font-bold text-foreground mb-2">Chat on WhatsApp</h3>
                   <p className="text-muted-foreground font-body mb-4">Get instant support via WhatsApp</p>
                   <a
-                    href="https://wa.me/23276000000"
+                    href="https://wa.me/23272150563"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block"

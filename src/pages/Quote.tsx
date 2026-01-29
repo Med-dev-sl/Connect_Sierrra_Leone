@@ -20,11 +20,11 @@ const services = [
 ];
 
 const budgetRanges = [
-  { id: 'under-500', label: 'Under $500' },
-  { id: '500-1000', label: '$500 - $1,000' },
-  { id: '1000-5000', label: '$1,000 - $5,000' },
-  { id: '5000-10000', label: '$5,000 - $10,000' },
-  { id: 'over-10000', label: '$10,000+' },
+  { id: 'under-500', label: 'Under SLe 5000' },
+  { id: '500-1000', label: 'SLe 5000 - SLe 10,000' },
+  { id: '1000-5000', label: 'SLe 10,000 - SLe 50,000' },
+  { id: '5000-10000', label: 'SLe 50,000 - SLe 100,000' },
+  { id: 'over-1000', label: 'Over SLe 100,000,000' },
 ];
 
 const Quote = () => {
