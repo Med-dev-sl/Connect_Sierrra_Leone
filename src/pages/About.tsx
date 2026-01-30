@@ -5,6 +5,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Card3D } from '@/components/Card3D';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
+import { useSEO } from '@/hooks/use-seo';
 
 const values = [
   { icon: Target, title: 'Excellence', description: 'We strive for the highest quality in everything we do.' },
@@ -23,6 +24,15 @@ const milestones = [
 ];
 
 const About = () => {
+  useSEO({
+    title: 'About Us | Connect Sierra Leone',
+    description: 'Learn about Connect Sierra Leone\'s mission to empower communities through innovative technology. Discover our story, values, and commitment to digital excellence.',
+    keywords: 'about Connect Sierra Leone, company mission, digital transformation, Sierra Leone tech company',
+    canonical: 'https://connect-sierraleone.com/about',
+    ogUrl: 'https://connect-sierraleone.com/about',
+    type: 'website',
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <ParticleBackground />

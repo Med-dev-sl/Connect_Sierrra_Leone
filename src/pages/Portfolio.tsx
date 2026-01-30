@@ -6,6 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Card3D } from '@/components/Card3D';
 import { Button } from '@/components/ui/button';
+import { useSEO } from '@/hooks/use-seo';
 
 const categories = ['All', 'Web Development', 'Mobile Apps'];
 
@@ -81,6 +82,15 @@ const projects = [
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+
+  useSEO({
+    title: 'Portfolio | Our Digital Projects',
+    description: 'Explore our portfolio of successful digital projects including web development, mobile apps, and IT solutions. See how Connect Sierra Leone transforms businesses with innovative technology.',
+    keywords: 'portfolio, web development, mobile apps, projects, digital solutions, Sierra Leone',
+    canonical: 'https://connect-sierraleone.com/portfolio',
+    ogUrl: 'https://connect-sierraleone.com/portfolio',
+    type: 'website',
+  });
 
   const filteredProjects = activeCategory === 'All' 
     ? projects 

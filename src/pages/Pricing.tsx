@@ -5,6 +5,7 @@ import { ParticleBackground } from '@/components/ParticleBackground';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import { useSEO } from '@/hooks/use-seo';
 
 const plans = [
   {
@@ -62,6 +63,15 @@ const plans = [
 ];
 
 const Pricing = () => {
+  useSEO({
+    title: 'Pricing | Affordable Web Development & IT Services',
+    description: 'Transparent, flexible pricing for web development, mobile apps, and IT services. Choose from Starter, Professional, or Enterprise plans tailored to your business needs.',
+    keywords: 'pricing, web development costs, software development pricing, affordable IT services',
+    canonical: 'https://connect-sierraleone.com/pricing',
+    ogUrl: 'https://connect-sierraleone.com/pricing',
+    type: 'website',
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <ParticleBackground />

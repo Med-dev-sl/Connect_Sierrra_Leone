@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { useSEO } from '@/hooks/use-seo';
 
 const contactInfo = [
   {
@@ -42,6 +43,16 @@ const contactInfo = [
 
 const Contact = () => {
   const { toast } = useToast();
+  
+  useSEO({
+    title: 'Contact Us | Connect Sierra Leone',
+    description: 'Get in touch with Connect Sierra Leone. We\'re here to answer your questions and discuss your project needs. Contact us via email, phone, or our contact form.',
+    keywords: 'contact Connect Sierra Leone, get in touch, support, business inquiry',
+    canonical: 'https://connect-sierraleone.com/contact',
+    ogUrl: 'https://connect-sierraleone.com/contact',
+    type: 'website',
+  });
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',

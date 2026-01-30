@@ -13,6 +13,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Card3D } from '@/components/Card3D';
 import { Button } from '@/components/ui/button';
+import { useSEO } from '@/hooks/use-seo';
 
 const services = [
   {
@@ -82,6 +83,15 @@ const services = [
 ];
 
 const Services = () => {
+  useSEO({
+    title: 'Services | Web Development, Mobile Apps & IT Solutions',
+    description: 'Professional IT services including web development, mobile app development, UI/UX design, phone unlock services, and computer software solutions. Custom solutions for your business needs.',
+    keywords: 'web development, mobile apps, UI/UX design, IT services, software solutions, phone unlock, Sierra Leone',
+    canonical: 'https://connect-sierraleone.com/services',
+    ogUrl: 'https://connect-sierraleone.com/services',
+    type: 'website',
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <ParticleBackground />
