@@ -46,7 +46,7 @@ const projects = [
     liveLink: 'https://uni-ai-playground.vercel.app',
     tags: ['React', 'TypeScript', 'Supabase', 'Gemini AI Agents'],
     color: 'from-indigo-500 to-blue-500',
-    comingSoon: true,
+    comingSoon: false,
   },
   // Mobile Apps
   {
