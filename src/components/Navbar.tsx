@@ -11,6 +11,7 @@ const navLinks = [
   { name: 'About', path: '/about' },
   { name: 'Team', path: '/team' },
   { name: 'Pricing', path: '/pricing' },
+  { name: 'Programming Class', path: '/programming-class' },
   { 
     name: 'More', 
     children: [

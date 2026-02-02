@@ -14,6 +14,7 @@ import Blog from "./pages/Blog";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Quote from "./pages/Quote";
+import ProgrammingClass from "./pages/ProgrammingClass";
 import { LoginPage } from "./pages/LoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminQuotes from "./pages/AdminQuotes";
@@ -43,6 +44,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/team" element={<Team />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/programming-class" element={<ProgrammingClass />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/faq" element={<FAQ />} />
