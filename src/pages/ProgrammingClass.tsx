@@ -5,6 +5,7 @@ import { ParticleBackground } from '@/components/ParticleBackground';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { useSEO } from '@/hooks/use-seo';
 
 const modules = [
@@ -101,6 +102,18 @@ const ProgrammingClass = () => {
     type: 'website',
   });
 
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: 'MERN Stack Programming & Development Class (4 Weeks)',
+    description: 'Intensive 4-week MERN stack training: HTML, CSS, JavaScript, MySQL, Express, React, Node.js, plus GitHub Copilot integration and real projects.',
+    provider: {
+      "@type": "Organization",
+      name: 'Connect Sierra Leone',
+      url: 'https://connect-sierraleone.com',
+    },
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <ParticleBackground />
@@ -122,6 +135,7 @@ const ProgrammingClass = () => {
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }} />
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -139,12 +153,15 @@ const ProgrammingClass = () => {
               Master full-stack web development in just 4 weeks. Learn HTML, CSS, JavaScript, MySQL, Express, React, Node.js, and GitHub Copilot for faster development.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="glow-button">
+              <Link to="/apply?program=MERN%20Stack" className="glow-button inline-flex items-center justify-center text-lg px-6 py-3 text-primary-foreground rounded-lg">
                 Enroll Now
-              </Button>
+              </Link>
               <Button size="lg" variant="outline">
                 Download Curriculum
               </Button>
+              <Link to="/programming-applicants" className="inline-flex items-center justify-center text-lg px-6 py-3 border border-primary/20 rounded-lg hover:bg-primary/5">
+                View Students
+              </Link>
             </div>
           </motion.div>
 
@@ -349,7 +366,6 @@ const ProgrammingClass = () => {
               ))}
             </div>
           </motion.div>
-
           {/* CTA Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -372,6 +388,8 @@ const ProgrammingClass = () => {
               </Button>
             </div>
           </motion.div>
+
+          {/* Student Application Form is available on the dedicated Apply page. */}
         </div>
       </main>
 

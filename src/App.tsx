@@ -15,6 +15,8 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Quote from "./pages/Quote";
 import ProgrammingClass from "./pages/ProgrammingClass";
+import ProgrammingClassApplicants from "./pages/ProgrammingClassApplicants";
+import ApplyPage from "./pages/Apply";
 import { LoginPage } from "./pages/LoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminQuotes from "./pages/AdminQuotes";
@@ -45,6 +47,8 @@ const App = () => (
           <Route path="/team" element={<Team />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/programming-class" element={<ProgrammingClass />} />
+          <Route path="/programming-applicants" element={<ProgrammingClassApplicants />} />
+          <Route path="/apply" element={<ApplyPage />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/faq" element={<FAQ />} />

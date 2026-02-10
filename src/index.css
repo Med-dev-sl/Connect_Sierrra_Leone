@@ -168,6 +168,29 @@
     transition: all 0.3s ease;
   }
 
+  /* Form inputs */
+  .input {
+    @apply block w-full rounded-md px-3 py-2 bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground;
+    border-color: hsl(var(--border));
+    color: hsl(var(--pure-black));
+  }
+
+  .input:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px hsl(var(--ring) / 0.12);
+    border-color: hsl(var(--ring));
+  }
+
+  textarea.input {
+    @apply resize-y;
+  }
+
+  /* Placeholder color for inputs */
+  .input::placeholder {
+    color: hsl(var(--muted-foreground));
+    opacity: 1;
+  }
+
   .glow-button:hover {
     box-shadow: 
       0 8px 40px hsl(var(--primary) / 0.6),
